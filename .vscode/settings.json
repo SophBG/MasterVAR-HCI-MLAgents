@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "HCI-MLAgent.sln"
+    "dotnet.defaultSolution": "MasterVAR-HCI-MLAgents.sln"
 }

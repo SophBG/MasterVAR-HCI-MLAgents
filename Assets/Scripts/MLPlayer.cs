@@ -1,6 +1,8 @@
 using UnityEngine;
 using Unity.MLAgents;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
+using Unity.MLAgents.Actuators;
 
 public class MLPlayer : Agent
 {
@@ -8,6 +10,9 @@ public class MLPlayer : Agent
     public float jumpForce;
     public float jumpCooldown;
     private bool readyToJump;
+    private bool jumpRequested;
+    public Transform origin;
+    private Rigidbody rb = null;
 
     [Header("Input Actions")]
     public InputActionAsset inputActions;
@@ -20,41 +25,32 @@ public class MLPlayer : Agent
 
     [Header("Obstacle")]
     public string obstacleTag;
-
-    private Rigidbody rb = null;
+    public string rewardTag;
 
     private void OnDestroy()
     {
         // Clean up jump action subscription
         jumpAction.performed -= OnJump;
     }
-    private void Start()
-    {
-        rb = this.GetComponent<Rigidbody>();
-
-        jumpAction = InputSystem.actions.FindAction("Jump");
-        // Set up jump action callback
-        jumpAction.performed += OnJump;
-        readyToJump = true;
-    }
-
+    
     private void Update()
     {
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, groundLayer);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public override void Initialize()
     {
-        if (collision.gameObject.CompareTag(obstacleTag))
-        {
-            Destroy(collision.gameObject);
-        }
+        rb = this.GetComponent<Rigidbody>();
+
+        jumpAction = InputSystem.actions.FindAction("Jump");
+        readyToJump = true;
+        jumpRequested = false;
     }
 
-    private void OnJump(InputAction.CallbackContext context)
+    public override void OnActionReceived(ActionBuffers actions)
     {
-        if (readyToJump && grounded)
+        if (actions.DiscreteActions[0] == 1 && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();
@@ -62,15 +58,61 @@ public class MLPlayer : Agent
         }
     }
 
+    public override void OnEpisodeBegin()
+    {
+        ResetPlayer();
+    }
+
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var discreteActions = actionsOut.DiscreteActions;
+        discreteActions[0] = 0;
+
+        // Set up jump action callback
+        jumpAction.performed += OnJump;
+        if (jumpRequested)
+        {
+            discreteActions[0] = 1;
+            jumpRequested = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(obstacleTag))
+        {
+            AddReward(-1.0f);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(rewardTag))
+        {
+            AddReward(0.1f);
+        }
+    }
+
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        jumpRequested = true;
+    }
+
     private void Jump()
     {
         // reset y velocity
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private void ResetPlayer()
+    {
+        this.transform.position = new Vector3(origin.position.x, origin.position.y, origin.position.z);
     }
 }

@@ -16,7 +16,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void Spawn()
     {
-        GameObject newObstacle = Instantiate(obstaclePrefab);
+        GameObject newObstacle = Instantiate(obstaclePrefab, transform);
         newObstacle.transform.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
         Invoke("Spawn", Random.Range(minDelay, maxDelay));
     }
