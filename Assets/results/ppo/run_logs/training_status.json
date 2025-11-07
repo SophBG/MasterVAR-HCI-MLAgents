@@ -2,22 +2,58 @@
     "MLPlayer": {
         "checkpoints": [
             {
-                "steps": 20732,
-                "file_path": "results\\ppo\\MLPlayer\\MLPlayer-20732.onnx",
-                "reward": -1.1099999994039536,
-                "creation_time": 1762482486.2034106,
+                "steps": 85499976,
+                "file_path": "results\\ppo\\MLPlayer\\MLPlayer-85499976.onnx",
+                "reward": -0.9611111097037792,
+                "creation_time": 1762521540.1642742,
                 "auxillary_file_paths": [
-                    "results\\ppo\\MLPlayer\\MLPlayer-20732.pt"
+                    "results\\ppo\\MLPlayer\\MLPlayer-85499976.pt"
+                ]
+            },
+            {
+                "steps": 85999960,
+                "file_path": "results\\ppo\\MLPlayer\\MLPlayer-85999960.onnx",
+                "reward": -0.9479310329489666,
+                "creation_time": 1762521724.671602,
+                "auxillary_file_paths": [
+                    "results\\ppo\\MLPlayer\\MLPlayer-85999960.pt"
+                ]
+            },
+            {
+                "steps": 86499966,
+                "file_path": "results\\ppo\\MLPlayer\\MLPlayer-86499966.onnx",
+                "reward": null,
+                "creation_time": 1762521910.4275146,
+                "auxillary_file_paths": [
+                    "results\\ppo\\MLPlayer\\MLPlayer-86499966.pt"
+                ]
+            },
+            {
+                "steps": 86999994,
+                "file_path": "results\\ppo\\MLPlayer\\MLPlayer-86999994.onnx",
+                "reward": -0.9568181804127314,
+                "creation_time": 1762522096.3234577,
+                "auxillary_file_paths": [
+                    "results\\ppo\\MLPlayer\\MLPlayer-86999994.pt"
+                ]
+            },
+            {
+                "steps": 87130390,
+                "file_path": "results\\ppo\\MLPlayer\\MLPlayer-87130390.onnx",
+                "reward": null,
+                "creation_time": 1762522154.674631,
+                "auxillary_file_paths": [
+                    "results\\ppo\\MLPlayer\\MLPlayer-87130390.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 20732,
+            "steps": 87130390,
             "file_path": "results\\ppo\\MLPlayer.onnx",
-            "reward": -1.1099999994039536,
-            "creation_time": 1762482486.2034106,
+            "reward": null,
+            "creation_time": 1762522154.674631,
             "auxillary_file_paths": [
-                "results\\ppo\\MLPlayer\\MLPlayer-20732.pt"
+                "results\\ppo\\MLPlayer\\MLPlayer-87130390.pt"
             ]
         }
     },

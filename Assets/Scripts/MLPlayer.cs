@@ -1,7 +1,6 @@
 using UnityEngine;
 using Unity.MLAgents;
 using UnityEngine.InputSystem;
-using Unity.VisualScripting;
 using Unity.MLAgents.Actuators;
 
 public class MLPlayer : Agent
@@ -25,7 +24,6 @@ public class MLPlayer : Agent
 
     [Header("Obstacle")]
     public string obstacleTag;
-    public string rewardTag;
 
     private void OnDestroy()
     {
@@ -87,14 +85,6 @@ public class MLPlayer : Agent
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(rewardTag))
-        {
-            AddReward(0.1f);
-        }
-    }
-
     private void OnJump(InputAction.CallbackContext context)
     {
         jumpRequested = true;
@@ -116,5 +106,10 @@ public class MLPlayer : Agent
     private void ResetPlayer()
     {
         this.transform.position = new Vector3(origin.position.x, origin.position.y, origin.position.z);
+    }
+
+    public void AddReward()
+    {
+        AddReward(0.1f);
     }
 }

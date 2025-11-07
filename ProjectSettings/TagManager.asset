@@ -7,7 +7,6 @@ TagManager:
   - Obstacle
   - Ground
   - EndWall
-  - ObstacleWall
   layers:
   - Default
   - TransparentFX
