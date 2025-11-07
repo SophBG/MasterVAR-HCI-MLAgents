@@ -1,0 +1,29 @@
+{
+    "MLPlayer": {
+        "checkpoints": [
+            {
+                "steps": 20732,
+                "file_path": "results\\ppo\\MLPlayer\\MLPlayer-20732.onnx",
+                "reward": -1.1099999994039536,
+                "creation_time": 1762482486.2034106,
+                "auxillary_file_paths": [
+                    "results\\ppo\\MLPlayer\\MLPlayer-20732.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 20732,
+            "file_path": "results\\ppo\\MLPlayer.onnx",
+            "reward": -1.1099999994039536,
+            "creation_time": 1762482486.2034106,
+            "auxillary_file_paths": [
+                "results\\ppo\\MLPlayer\\MLPlayer-20732.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.1"
+    }
+}

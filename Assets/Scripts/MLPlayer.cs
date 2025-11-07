@@ -83,6 +83,7 @@ public class MLPlayer : Agent
         {
             AddReward(-1.0f);
             Destroy(collision.gameObject);
+            EndEpisode();
         }
     }
 
@@ -104,6 +105,7 @@ public class MLPlayer : Agent
         // reset y velocity
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        AddReward(-0.01f);
     }
 
     private void ResetJump()
